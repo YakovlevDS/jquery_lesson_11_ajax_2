@@ -1,0 +1,41 @@
+$.ajax({
+			
+				url:'server.php',
+				type:'POST',
+				data:arr,/*'name='+$('input[name=name]').val() + '&email=' + $('input[name=email]').val(),*/
+				beforeSend:function(obj) {
+					///action
+				},
+				cache:true,
+				complete:function(obj,status) {
+					//alert('complete'+status);
+				},	
+				//contentType://'multipart/form-data'//'text/plain'//'application/x-www-form-urlencoded',
+				context:$('form'),//#btn
+				dataType:"json",/*'json',xml html text script*/
+				success:function(data) {
+					//$(this).css({'border':'1px solid red'});
+					
+					var block = $(this);
+					
+					$('#ajax').fadeOut(1000,function() {
+						
+						block.append('<h3>' + data.name + '</h3>' + '<p>' + data.text + '</p>');
+						
+					});
+					
+					
+					//alert(data);
+					//alert(data.name);
+					//$('.container').append(data);
+				},
+				error:function(obj,str) {
+					alert(str);
+				},
+				headers:{
+					'header':'come'
+				},
+				//processData:false,
+				timeOut:2000
+				
+			});
